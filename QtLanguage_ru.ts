@@ -9,129 +9,141 @@
         <translation>Блокнот</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="41"/>
-        <location filename="mainwindow.cpp" line="215"/>
+        <location filename="mainwindow.ui" line="37"/>
+        <location filename="mainwindow.cpp" line="257"/>
         <source>Файл</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="52"/>
-        <location filename="mainwindow.cpp" line="225"/>
+        <location filename="mainwindow.ui" line="49"/>
+        <location filename="mainwindow.cpp" line="268"/>
         <source>Настройки</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="56"/>
-        <location filename="mainwindow.cpp" line="226"/>
+        <location filename="mainwindow.ui" line="53"/>
+        <location filename="mainwindow.cpp" line="269"/>
         <source>Управление</source>
         <translation>Управление</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="62"/>
-        <location filename="mainwindow.cpp" line="228"/>
+        <location filename="mainwindow.ui" line="59"/>
+        <location filename="mainwindow.cpp" line="271"/>
         <source>Язык</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="69"/>
+        <location filename="mainwindow.ui" line="66"/>
         <source>Тема</source>
         <translation>Тема</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="80"/>
-        <location filename="mainwindow.cpp" line="235"/>
+        <location filename="mainwindow.ui" line="77"/>
+        <location filename="mainwindow.cpp" line="278"/>
         <source>Справка</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="86"/>
-        <location filename="mainwindow.cpp" line="222"/>
+        <location filename="mainwindow.ui" line="83"/>
+        <location filename="mainwindow.cpp" line="265"/>
         <source>Вид</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="98"/>
-        <location filename="mainwindow.cpp" line="217"/>
+        <location filename="mainwindow.ui" line="95"/>
+        <source>toolBar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="114"/>
+        <location filename="mainwindow.cpp" line="259"/>
         <source>Открыть</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="103"/>
-        <location filename="mainwindow.cpp" line="218"/>
+        <location filename="mainwindow.ui" line="119"/>
+        <location filename="mainwindow.cpp" line="260"/>
         <source>Открыть для чтения</source>
         <translation>Открыть для чтения</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="108"/>
-        <location filename="mainwindow.cpp" line="219"/>
+        <location filename="mainwindow.ui" line="128"/>
+        <location filename="mainwindow.cpp" line="261"/>
         <source>Сохранить</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="113"/>
+        <location filename="mainwindow.ui" line="133"/>
         <source>Клавиши</source>
         <translation>Клавиши</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="118"/>
-        <location filename="mainwindow.cpp" line="229"/>
+        <location filename="mainwindow.ui" line="138"/>
+        <location filename="mainwindow.cpp" line="272"/>
         <source>Русский</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="123"/>
-        <location filename="mainwindow.cpp" line="230"/>
+        <location filename="mainwindow.ui" line="143"/>
+        <location filename="mainwindow.cpp" line="273"/>
         <source>English</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="128"/>
-        <location filename="mainwindow.cpp" line="232"/>
+        <location filename="mainwindow.ui" line="148"/>
+        <location filename="mainwindow.cpp" line="275"/>
         <source>Светлая</source>
         <translation>Светлая</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="133"/>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.ui" line="153"/>
+        <location filename="mainwindow.cpp" line="276"/>
         <source>Тёмная</source>
         <translation>Тёмная</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="138"/>
-        <location filename="mainwindow.cpp" line="220"/>
+        <location filename="mainwindow.ui" line="158"/>
+        <location filename="mainwindow.cpp" line="263"/>
         <source>Выход</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="143"/>
-        <location filename="mainwindow.cpp" line="216"/>
+        <location filename="mainwindow.ui" line="167"/>
+        <location filename="mainwindow.cpp" line="258"/>
         <source>Создать</source>
         <translation>Создать</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="148"/>
-        <location filename="mainwindow.cpp" line="236"/>
+        <location filename="mainwindow.ui" line="172"/>
+        <location filename="mainwindow.cpp" line="279"/>
         <source>О программе</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="156"/>
-        <location filename="mainwindow.cpp" line="223"/>
+        <location filename="mainwindow.ui" line="180"/>
+        <location filename="mainwindow.cpp" line="266"/>
         <source>Проводник</source>
         <translation>Проводник</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="213"/>
+        <location filename="mainwindow.ui" line="189"/>
+        <location filename="mainwindow.cpp" line="262"/>
+        <location filename="mainwindow.cpp" line="326"/>
+        <source>Печать</source>
+        <translation>Печать</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="255"/>
         <source>Блокнот</source>
         <translation>Блокнот</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="270"/>
         <source>Кнопки</source>
         <translation>Кнопки</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="231"/>
+        <location filename="mainwindow.cpp" line="274"/>
         <source>Темы</source>
         <translation>Темы</translation>
     </message>
@@ -145,19 +157,20 @@
     </message>
     <message>
         <location filename="aboutprogram.ui" line="68"/>
-        <location filename="aboutprogram.cpp" line="23"/>
+        <location filename="aboutprogram.cpp" line="25"/>
         <source>Блокнот by Renkeles</source>
         <translation>Блокнот by Renkeles</translation>
     </message>
     <message>
         <location filename="aboutprogram.ui" line="75"/>
-        <source>ver. 0.2.1 </source>
+        <source>ver. 0.3.0</source>
+        <oldsource>ver. 0.2.1 </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="aboutprogram.cpp" line="21"/>
+        <location filename="aboutprogram.cpp" line="23"/>
         <source>О программе</source>
-        <translation type="unfinished">О программе</translation>
+        <translation>О программе</translation>
     </message>
 </context>
 <context>
@@ -169,25 +182,25 @@
     </message>
     <message>
         <location filename="buttonchange.ui" line="45"/>
-        <location filename="buttonchange.cpp" line="47"/>
+        <location filename="buttonchange.cpp" line="49"/>
         <source>Создать</source>
         <translation>Создать</translation>
     </message>
     <message>
         <location filename="buttonchange.ui" line="61"/>
-        <location filename="buttonchange.cpp" line="48"/>
+        <location filename="buttonchange.cpp" line="50"/>
         <source>Открыть</source>
         <translation>Открыть</translation>
     </message>
     <message>
         <location filename="buttonchange.ui" line="77"/>
-        <location filename="buttonchange.cpp" line="49"/>
+        <location filename="buttonchange.cpp" line="51"/>
         <source>Сохранить</source>
         <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="buttonchange.ui" line="93"/>
-        <location filename="buttonchange.cpp" line="50"/>
+        <location filename="buttonchange.cpp" line="52"/>
         <source>Выход</source>
         <translation>Выход</translation>
     </message>
@@ -232,7 +245,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="buttonchange.cpp" line="45"/>
+        <location filename="buttonchange.cpp" line="47"/>
         <source>Кнопки</source>
         <translation>Кнопки</translation>
     </message>

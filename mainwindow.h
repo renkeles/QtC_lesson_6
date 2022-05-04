@@ -50,6 +50,8 @@ private slots:
 
     void on_treeFileView_doubleClicked(const QModelIndex &index);
 
+    void on_print_triggered();
+
 private:
     Ui::MainWindow *ui;
     aboutProgram *aboutPr;

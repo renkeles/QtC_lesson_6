@@ -6,8 +6,10 @@
 #include <QDebug>
 #include <QMdiSubWindow>
 #include <QSizePolicy>
-
-
+#include <QPlainTextEdit>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,25 +41,19 @@ MainWindow::MainWindow(QWidget *parent)
     model->setRootPath("");
 
     QStringList filters;
-    filters << "*.txt" << "*.ini" << "*.json";
+    filters << "*.txt" << "*.ini" << "*.json" << "*.h";
 
     model->setNameFilters(filters);
     model->setNameFilterDisables(false);
-
 
     ui->treeFileView->setModel(model);
 
     ui->treeFileView->setColumnWidth(0,200);
 
-    //ui->subwindow->showMaximized();
-
     ui->mdiArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->mdiArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    //ui->subwindow->setWindowTitle(tr("Документ"));
-
     MainWindow::on_create_triggered();
-
 
 }
 
@@ -67,7 +63,6 @@ MainWindow::~MainWindow()
     delete aboutPr;
     delete btnCh;
 }
-
 
 void MainWindow::on_open_triggered()
 {
@@ -79,6 +74,7 @@ void MainWindow::on_open_triggered()
         {
             QTextStream stream(&file);
             QMdiSubWindow *subW = new QMdiSubWindow;
+            subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
             subW->setWindowTitle(filename);
             subW->resize(300,200);
             QPlainTextEdit *pte = new QPlainTextEdit;
@@ -94,7 +90,6 @@ void MainWindow::on_open_triggered()
     }
 }
 
-
 void MainWindow::on_openReadOnly_triggered()
 {
     QString filename = QFileDialog::getOpenFileName();
@@ -105,6 +100,7 @@ void MainWindow::on_openReadOnly_triggered()
         {
             QTextStream stream(&file);
             QMdiSubWindow *subW = new QMdiSubWindow;
+            subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
             subW->setWindowTitle(filename);
             subW->resize(300,200);
             QPlainTextEdit *pte = new QPlainTextEdit;
@@ -119,7 +115,6 @@ void MainWindow::on_openReadOnly_triggered()
         }
     }
 }
-
 
 void MainWindow::on_save_triggered()
 {
@@ -137,16 +132,15 @@ void MainWindow::on_save_triggered()
         }
 }
 
-
 void MainWindow::on_exit_triggered()
 {
     exit(0);
 }
 
-
 void MainWindow::on_create_triggered()
 {
     QMdiSubWindow *subW = new QMdiSubWindow;
+    subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
     subW->setWindowTitle("Документ " + QString::number(counter));
     ++counter;
     subW->resize(300,200);
@@ -159,18 +153,15 @@ void MainWindow::on_create_triggered()
     subW->show();
 }
 
-
 void MainWindow::on_aboutProgram_triggered()
 {
     aboutPr->show();
 }
 
-
 void MainWindow::on_buttons_triggered()
 {
     btnCh->show();
 }
-
 
 void MainWindow::on_treeViewShow_triggered()
 {
@@ -183,7 +174,6 @@ void MainWindow::on_treeViewShow_triggered()
     }
 }
 
-
 void MainWindow::on_dark_triggered()
 {
     QFile styleSheetFile(":/style/qss/Combinear.qss");
@@ -191,7 +181,6 @@ void MainWindow::on_dark_triggered()
     QString styleSheet = QLatin1String(styleSheetFile.readAll());
     qApp->setStyleSheet(styleSheet);
 }
-
 
 void MainWindow::on_light_triggered()
 {
@@ -261,7 +250,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
     }
 }
 
-
 void MainWindow::setDefaultLanguage()
 {
     this->setWindowTitle(tr("Блокнот"));
@@ -271,6 +259,7 @@ void MainWindow::setDefaultLanguage()
         ui->open->setText(tr("Открыть"));
         ui->openReadOnly->setText(tr("Открыть для чтения"));
         ui->save->setText(tr("Сохранить"));
+        ui->print->setText(tr("Печать"));
         ui->exit->setText(tr("Выход"));
 
     ui->view->setTitle(tr("Вид"));
@@ -299,7 +288,6 @@ void MainWindow::on_russian_triggered()
     ui->retranslateUi(this);
 }
 
-
 void MainWindow::on_english_triggered()
 {
     qtranslator.load(":/language/qm/QtLanguage_en.qm");
@@ -309,21 +297,76 @@ void MainWindow::on_english_triggered()
     ui->retranslateUi(this);
 }
 
-
-
-
-
 void MainWindow::on_treeFileView_doubleClicked(const QModelIndex &index)
 {
-
         QFile file(model->filePath(index));
         if(file.open(QFile::ReadOnly | QFile::Text))
         {
             QTextStream stream(&file);
-            ui->MainPlainTextEdit->setPlainText(stream.readAll());
-            ui->MainPlainTextEdit->setReadOnly(false);
+            QMdiSubWindow *subW = new QMdiSubWindow;
+            subW->setWindowTitle(index.data(Qt::DisplayRole).toString());
+            subW->resize(300,200);
+            QPlainTextEdit *pte = new QPlainTextEdit;
+            pte->setPlainText(stream.readAll());
+            pte->setReadOnly(false);
+            subW->setWidget(pte);
+            subW->setAttribute(Qt::WA_DeleteOnClose);
+            ui->mdiArea->addSubWindow(subW);
+            subW->showMaximized();
+            subW->show();
             file.close();
         }
+}
+
+
+void MainWindow::on_print_triggered()
+{
+    QPrinter printer;
+    QPrintDialog dlg(&printer, this);
+    dlg.setWindowTitle(tr("Печать"));
+    if (dlg.exec() != QDialog::Accepted)
+    return;
+
+    QPlainTextEdit *pte = qobject_cast<QPlainTextEdit*>(ui->mdiArea->currentSubWindow()->widget());
+    QString printStr = pte->toPlainText();
+    QChar *list = printStr.data();
+    QStringList strlst;
+    int line = 10, cursor = 0;
+    for (bool getst = true;getst;)
+    {
+        int index = printStr.indexOf("\n", cursor);
+        QString s = "";
+        if (index == -1)
+        {
+            getst = false;
+            s.append(&list[cursor], printStr.length() - cursor);
+        }
+        else s.append(&list[cursor], index - cursor);
+        cursor = index + 1;
+        strlst << s;
+    }
+
+    QPainter painter;
+    painter.begin(&printer);
+    //int w = painter.window().width();
+    int h = painter.window().height();
+    int amount = strlst.count();
+    QFont font = painter.font();
+    QFontMetrics fmetrics(font);
+    for (int i = 0; i < amount; i++)
+    {
+        QPointF pf;
+        pf.setX(10);
+        pf.setY(line);
+        painter.drawText(pf, strlst.at(i));
+        line += fmetrics.height();
+        if (h - line <= fmetrics.height())
+        {
+            printer.newPage();
+            line = 10;
+        }
+    }
+    painter.end();
 
 }
 
