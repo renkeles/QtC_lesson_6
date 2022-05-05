@@ -59,6 +59,7 @@ private:
     buttonChange *btnCh;
     QTranslator qtranslator;
     QFileSystemModel *model;
+    enum ReadOnlyType {readonly, read};
 
     int counter;
 
@@ -66,6 +67,7 @@ private:
 
     void setStyle(Style::StyleName stlName);
     void setLanguage(Language::CodeLanguage codeLanguage);
+    void openFile(ReadOnlyType, QFile &file, QString);
 
 
 };

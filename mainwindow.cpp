@@ -63,6 +63,28 @@ MainWindow::~MainWindow()
     delete btnCh;
 }
 
+void MainWindow::openFile(ReadOnlyType type, QFile &file, QString filename)
+{
+    QTextStream stream(&file);
+    QMdiSubWindow *subW = new QMdiSubWindow;
+    subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
+    subW->setWindowTitle(filename);
+    subW->resize(300,200);
+    QPlainTextEdit *pte = new QPlainTextEdit;
+    pte->setPlainText(stream.readAll());
+    if(ReadOnlyType::readonly == type)
+    {
+      pte->setReadOnly(true);
+    }
+    pte->setReadOnly(false);
+    subW->setWidget(pte);
+    subW->setAttribute(Qt::WA_DeleteOnClose);
+    ui->mdiArea->addSubWindow(subW);
+    subW->showMaximized();
+    subW->show();
+    file.close();
+}
+
 void MainWindow::on_open_triggered()
 {
     QString filename = QFileDialog::getOpenFileName();
@@ -71,20 +93,7 @@ void MainWindow::on_open_triggered()
         QFile file(filename);
         if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
         {
-            QTextStream stream(&file);
-            QMdiSubWindow *subW = new QMdiSubWindow;
-            subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
-            subW->setWindowTitle(filename);
-            subW->resize(300,200);
-            QPlainTextEdit *pte = new QPlainTextEdit;
-            pte->setPlainText(stream.readAll());
-            pte->setReadOnly(false);
-            subW->setWidget(pte);
-            subW->setAttribute(Qt::WA_DeleteOnClose);
-            ui->mdiArea->addSubWindow(subW);
-            subW->showMaximized();
-            subW->show();
-            file.close();
+            MainWindow::openFile(ReadOnlyType::read, file, filename);
         }
     }
 }
@@ -97,20 +106,7 @@ void MainWindow::on_openReadOnly_triggered()
         QFile file(filename);
         if(file.open(QFile::ReadOnly))
         {
-            QTextStream stream(&file);
-            QMdiSubWindow *subW = new QMdiSubWindow;
-            subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
-            subW->setWindowTitle(filename);
-            subW->resize(300,200);
-            QPlainTextEdit *pte = new QPlainTextEdit;
-            pte->setPlainText(stream.readAll());
-            pte->setReadOnly(true);
-            subW->setWidget(pte);
-            subW->setAttribute(Qt::WA_DeleteOnClose);
-            ui->mdiArea->addSubWindow(subW);
-            subW->showMaximized();
-            subW->show();
-            file.close();
+            MainWindow::openFile(ReadOnlyType::readonly, file, filename);
         }
     }
 }
@@ -325,19 +321,8 @@ void MainWindow::on_treeFileView_doubleClicked(const QModelIndex &index)
         QFile file(model->filePath(index));
         if(file.open(QFile::ReadOnly | QFile::Text))
         {
-            QTextStream stream(&file);
-            QMdiSubWindow *subW = new QMdiSubWindow;
-            subW->setWindowTitle(index.data(Qt::DisplayRole).toString());
-            subW->resize(300,200);
-            QPlainTextEdit *pte = new QPlainTextEdit;
-            pte->setPlainText(stream.readAll());
-            pte->setReadOnly(false);
-            subW->setWidget(pte);
-            subW->setAttribute(Qt::WA_DeleteOnClose);
-            ui->mdiArea->addSubWindow(subW);
-            subW->showMaximized();
-            subW->show();
-            file.close();
+            QString filename = index.data(Qt::DisplayRole).toString();
+            MainWindow::openFile(ReadOnlyType::read, file, filename);
         }
 }
 
