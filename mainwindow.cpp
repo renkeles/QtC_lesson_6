@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     counter = 0;
 
-    this->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+    this->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
     ui->setupUi(this);
     aboutPr = new aboutProgram;
     btnCh = new buttonChange;
@@ -29,10 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Templates Qt Style Sheets https://qss-stock.devsecstudio.com/
 
-    QFile styleSheetFile(":/style/qss/Integrid.qss");
-    styleSheetFile.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(styleSheetFile.readAll());
-    qApp->setStyleSheet(styleSheet);
+    MainWindow::setStyle(Style::StyleName::light);
 
     setDefaultLanguage();
     MainWindow::on_russian_triggered();
@@ -55,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     MainWindow::on_create_triggered();
 
+
+
 }
 
 MainWindow::~MainWindow()
@@ -74,7 +73,7 @@ void MainWindow::on_open_triggered()
         {
             QTextStream stream(&file);
             QMdiSubWindow *subW = new QMdiSubWindow;
-            subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+            subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
             subW->setWindowTitle(filename);
             subW->resize(300,200);
             QPlainTextEdit *pte = new QPlainTextEdit;
@@ -100,7 +99,7 @@ void MainWindow::on_openReadOnly_triggered()
         {
             QTextStream stream(&file);
             QMdiSubWindow *subW = new QMdiSubWindow;
-            subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+            subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
             subW->setWindowTitle(filename);
             subW->resize(300,200);
             QPlainTextEdit *pte = new QPlainTextEdit;
@@ -140,7 +139,7 @@ void MainWindow::on_exit_triggered()
 void MainWindow::on_create_triggered()
 {
     QMdiSubWindow *subW = new QMdiSubWindow;
-    subW->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+    subW->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
     subW->setWindowTitle("Документ " + QString::number(counter));
     ++counter;
     subW->resize(300,200);
@@ -174,20 +173,32 @@ void MainWindow::on_treeViewShow_triggered()
     }
 }
 
-void MainWindow::on_dark_triggered()
+void MainWindow::setStyle(Style::StyleName stlName)
 {
-    QFile styleSheetFile(":/style/qss/Combinear.qss");
+    QString styleFile;
+
+    if(Style::StyleName::light == stlName)
+    {
+        styleFile = ":/style/qss/Integrid.qss";
+    }else if(Style::StyleName::dark == stlName)
+    {
+        styleFile = ":/style/qss/Combinear.qss";
+    }
+
+    QFile styleSheetFile(styleFile);
     styleSheetFile.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(styleSheetFile.readAll());
     qApp->setStyleSheet(styleSheet);
 }
 
+void MainWindow::on_dark_triggered()
+{
+    MainWindow::setStyle(Style::StyleName::dark);
+}
+
 void MainWindow::on_light_triggered()
 {
-    QFile styleSheetFile(":/style/qss/Integrid.qss");
-    styleSheetFile.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(styleSheetFile.readAll());
-    qApp->setStyleSheet(styleSheet);
+    MainWindow::setStyle(Style::StyleName::light);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
@@ -239,7 +250,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         if (e->modifiers() == Qt::ControlModifier && e->key() == Qt::Key_Q)
         {
             exit(0);
-            //qApp->quit();
         }
     }else if(!btnCh->getCheckQuit())
     {
@@ -247,6 +257,11 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         {
             exit(0);
         }
+    }
+
+    if (e->modifiers() == Qt::ControlModifier && e->key() == Qt::Key_P)
+    {
+        MainWindow::on_print_triggered();
     }
 }
 
@@ -279,22 +294,30 @@ void MainWindow::setDefaultLanguage()
         ui->aboutProgram->setText(tr("О программе"));
 }
 
+void MainWindow::setLanguage(Language::CodeLanguage codeLanguage)
+{
+    if(Language::CodeLanguage::ru == codeLanguage)
+    {
+        qtranslator.load(":/language/qm/QtLanguage_ru.qm");
+    }else if(Language::CodeLanguage::en == codeLanguage)
+    {
+        qtranslator.load(":/language/qm/QtLanguage_en.qm");
+    }
+
+    qApp->installTranslator(&qtranslator);
+    btnCh->setLanguage(codeLanguage);
+    aboutPr->setLanguage(codeLanguage);
+    ui->retranslateUi(this);
+}
+
 void MainWindow::on_russian_triggered()
 {
-    qtranslator.load(":/language/qm/QtLanguage_ru.qm");
-    qApp->installTranslator(&qtranslator);
-    btnCh->setLanguage(Language::CodeLanguage::ru);
-    aboutPr->setLanguage(Language::CodeLanguage::ru);
-    ui->retranslateUi(this);
+    MainWindow::setLanguage(Language::CodeLanguage::ru);
 }
 
 void MainWindow::on_english_triggered()
 {
-    qtranslator.load(":/language/qm/QtLanguage_en.qm");
-    qApp->installTranslator(&qtranslator);
-    btnCh->setLanguage(Language::CodeLanguage::en);
-    aboutPr->setLanguage(Language::CodeLanguage::en);
-    ui->retranslateUi(this);
+    MainWindow::setLanguage(Language::CodeLanguage::en);
 }
 
 void MainWindow::on_treeFileView_doubleClicked(const QModelIndex &index)

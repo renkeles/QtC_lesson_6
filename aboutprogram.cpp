@@ -8,7 +8,7 @@ aboutProgram::aboutProgram(QDialog *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+    this->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
 
     setDefaultLanguage();
 }

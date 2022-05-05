@@ -13,13 +13,15 @@ SOURCES += \
     buttonchange.cpp \
     language.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    style.cpp
 
 HEADERS += \
     aboutprogram.h \
     buttonchange.h \
     language.h \
-    mainwindow.h
+    mainwindow.h \
+    style.h
 
 FORMS += \
     aboutprogram.ui \

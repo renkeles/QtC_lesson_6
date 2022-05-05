@@ -7,7 +7,7 @@ buttonChange::buttonChange(QDialog *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowIcon(QIcon(":/image/png/2944881_bug_seo_user_virus_icon.png"));
+    this->setWindowIcon(QIcon(":/image/png/image/logo/2944881_bug_seo_user_virus_icon.png"));
 
     ui->radioButton_ctrl_n->setChecked(true);
     ui->radioButton_ctrl_o->setChecked(true);

@@ -7,6 +7,7 @@
 #include "language.h"
 #include <QTranslator>
 #include <QFileSystemModel>
+#include "style.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -62,6 +63,10 @@ private:
     int counter;
 
     void setDefaultLanguage();
+
+    void setStyle(Style::StyleName stlName);
+    void setLanguage(Language::CodeLanguage codeLanguage);
+
 
 };
 #endif // MAINWINDOW_H
